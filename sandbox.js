@@ -2,6 +2,8 @@ var SpiceFS = require("./lib");
 
 SpiceFS.Repository.open("./test3", function(err, repo){
     console.log(repo, repo.isFresh);
+	console.log(repo.racks.getPublic());
+	repo.racks.getPublic().foo = "bar";
     if(repo && repo.isFresh)
     {
         repo.mkdirpSync();
