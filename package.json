@@ -1,0 +1,9 @@
+{
+    "name": "SpiceFS",
+    "version": "0.0.1",
+    "main":"./lib",
+    "dependencies":{
+        "bson":"*",
+        "fs.extra":"*"
+    }
+}
