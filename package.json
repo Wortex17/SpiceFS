@@ -2,6 +2,10 @@
     "name": "SpiceFS",
     "version": "0.0.1",
     "main":"./lib",
+    "repository":{
+        "type" : "git",
+        "url" : "https://github.com/Wortex17/SpiceFS"
+    },
     "dependencies":{
         "bson":"*",
         "fs.extra":"*"
