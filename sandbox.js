@@ -2,12 +2,14 @@ var EncryptedObject = require("./lib/Security/EncryptedObject");
 var Storage = require("./lib/Storage");
 var NodeRSA = require('node-rsa');
 
-//testWithPassword();
-testWithRSA();
 
 var origin = {
     foo: new Date()
 };
+
+
+//testWithPassword();
+testWithRSA();
 
 function testWithPassword()
 {
