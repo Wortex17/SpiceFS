@@ -2,15 +2,18 @@ var EncryptedObject = require("./lib/Security/EncryptedObject");
 var Storage = require("./lib/Storage");
 var NodeRSA = require('node-rsa');
 
-testWithPassword();
-//testWithRSA();
+//testWithPassword();
+testWithRSA();
+
+var origin = {
+    foo: new Date()
+};
 
 function testWithPassword()
 {
 
     var key = 'KDFDKFKKDFKDF';
 
-    var origin = {foo: new Date()};
     var encrypted = EncryptedObject.encryptObjectPassword(origin, key);
 
     console.log(origin);
@@ -41,10 +44,6 @@ function testWithRSA()
     'Es+KCn25OKXR/FJ5fu6A6A+MptABL3r8SEjlpLc=\n'+
     '-----END RSA PRIVATE KEY-----');
 
-
-//key = "KDFDKFKKDFKDF";
-
-    var origin = {foo: new Date()};
     var encrypted = EncryptedObject.encryptObjectRSA(origin, key);
 
     console.log(origin);
