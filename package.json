@@ -8,6 +8,8 @@
     },
     "dependencies":{
         "bson":"*",
-        "fs.extra":"*"
+        "fs.extra":"*",
+        "buffer-equal": "*",
+        "observed": "*"
     }
 }

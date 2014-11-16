@@ -1,66 +1,25 @@
-var EncryptedObject = require("./lib/Security/EncryptedObject");
-var Storage = require("./lib/Storage");
-var NodeRSA = require('node-rsa');
+
+var SpicesDrawer = require("./lib/v1/Spices/Drawer");
+
+var drawerA = new SpicesDrawer();
+var drawerB = new SpicesDrawer();
+
+drawerB.Contents["number"] = 500;
+drawerB.recalculateLog();
+
+drawerA.Contents["number"] = 404;
+drawerA.Contents["string"] = 'older';
+drawerA.Contents["object"] = {foo:'bar'};
+drawerA.Contents["array"] = ['cookie'];
+drawerA.Contents["null"] = null;
+drawerA.Contents["object"].ssss = 4;
+
+drawerB.Contents["string"] = 'newer';
+
+drawerA.mergeDrawer(drawerB);
 
 
-var origin = {
-    foo: new Date()
-};
-
-
-//testWithPassword();
-testWithRSA();
-
-function testWithPassword()
-{
-
-    var key = 'KDFDKFKKDFKDF';
-
-    var encrypted = EncryptedObject.encryptObjectPassword(origin, key);
-
-    console.log(origin);
-    Storage.storeObjectAs(encrypted, "./test.bson", function(){
-        console.log(encrypted);
-        Storage.loadObjectFrom("./test.bson", function(err, obj){
-            if(err)
-                throw err;
-            var loadedEncrypted = EncryptedObject.fromBSON(obj);
-            console.log(loadedEncrypted);
-            var decrypted = loadedEncrypted.decryptPassword(key);
-            console.log(decrypted);
-        });
-    });
-
-}
-
-function testWithRSA()
-{
-
-    var key = new NodeRSA('-----BEGIN RSA PRIVATE KEY-----\n'+
-    'MIIBOQIBAAJAVY6quuzCwyOWzymJ7C4zXjeV/232wt2ZgJZ1kHzjI73wnhQ3WQcL\n'+
-    'DFCSoi2lPUW8/zspk0qWvPdtp6Jg5Lu7hwIDAQABAkBEws9mQahZ6r1mq2zEm3D/\n'+
-    'VM9BpV//xtd6p/G+eRCYBT2qshGx42ucdgZCYJptFoW+HEx/jtzWe74yK6jGIkWJ\n'+
-    'AiEAoNAMsPqwWwTyjDZCo9iKvfIQvd3MWnmtFmjiHoPtjx0CIQCIMypAEEkZuQUi\n'+
-    'pMoreJrOlLJWdc0bfhzNAJjxsTv/8wIgQG0ZqI3GubBxu9rBOAM5EoA4VNjXVigJ\n'+
-    'QEEk1jTkp8ECIQCHhsoq90mWM/p9L5cQzLDWkTYoPI49Ji+Iemi2T5MRqwIgQl07\n'+
-    'Es+KCn25OKXR/FJ5fu6A6A+MptABL3r8SEjlpLc=\n'+
-    '-----END RSA PRIVATE KEY-----');
-
-    var encrypted = EncryptedObject.encryptObjectRSA(origin, key);
-
-    console.log(origin);
-    Storage.storeObjectAs(encrypted, "./test.bson", function(){
-        console.log(encrypted);
-        Storage.loadObjectFrom("./test.bson", function(err, obj){
-            if(err)
-                throw err;
-            var loadedEncrypted = EncryptedObject.fromBSON(obj);
-            console.log(loadedEncrypted);
-            var decrypted = loadedEncrypted.decryptRSA(key);
-            console.log(decrypted);
-        });
-    });
-
-}
+console.log(drawerA.Log);
+console.log(drawerB.Log);
 
 /**/
